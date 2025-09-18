@@ -11,6 +11,11 @@ const connection = mysql.createConnection({
 
 connection.connect((err) => {
   if(err){
-
+    console.log(err);
   }
-})
+  else{
+    console.log("connesso")
+  }
+});
+
+module.export = connection;
