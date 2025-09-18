@@ -1,10 +1,10 @@
 // stabilisco la connessione al db
-const posts = require('../data/db.js');
+const connection = require('../data/db.js');
 
 //definisco le rotte per i post
 //INDEX
 const index = (req, res) => {
-  res.json(posts)
+  const sql = "SELECT * FROM posts"
 }
 
 //SHOW
