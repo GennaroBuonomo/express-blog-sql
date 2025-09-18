@@ -1,5 +1,5 @@
-// recupero i posts
-const posts = require('../data/posts.js');
+// stabilisco la connessione al db
+const posts = require('../data/db.js');
 
 //definisco le rotte per i post
 //INDEX
