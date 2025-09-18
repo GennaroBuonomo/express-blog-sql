@@ -15,12 +15,19 @@ const index = (req, res) => {
 
 //SHOW
 const show = (req, res) => {
-  const id = parseInt(req.params.id);
+  const { id } = req.params;
   
-  //recupero il post con l'id
-  const post = posts.find(item => item.id === id);
+  //preparo la query per recuperare il singolo post
+  const postSql = "SELECT * FROM posts WHERE id = ?";
 
-  res.json(post);
+  //eseguo la query
+  connection.query(postSql, [id], (err, resultPost) => {
+    if(err) return res.status(500).json({error: `Errore nell'esecuzione della query: ${err}`});
+    if(resultPost.length === 0) return res.status(404).json({error: "Post non trovato"});
+
+    res.json(resultPost[0]);
+  })
+
 }
 
 //STORE
