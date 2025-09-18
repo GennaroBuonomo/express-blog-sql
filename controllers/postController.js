@@ -4,7 +4,13 @@ const connection = require('../data/db.js');
 //definisco le rotte per i post
 //INDEX
 const index = (req, res) => {
-  const sql = "SELECT * FROM posts"
+  const sql = "SELECT * FROM posts";
+
+  // Eseguo la query
+  connection.query(sql, (err, results) => {
+    if(err) return res.status(500).json({error: `Errore nell'esecuzione della query: ${err}`});
+    res.json(results)
+  });
 }
 
 //SHOW
