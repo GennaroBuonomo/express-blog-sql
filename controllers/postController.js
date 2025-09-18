@@ -74,14 +74,17 @@ const modify = (req, res) => {
 
 //DESTROY
 const destroy = (req, res) => {
-  const id = parseInt(req.params.id);
+  const { id } = req.params;
 
-  const post = posts.find(item => item.id === id)
+  // preparo la query
+  const sql = "DELETE * FROM posts WHERE id = ?";
 
   //Cancellare il post dall array
-  posts.splice(posts.indexOf(post), 1);
-  //restituisco lo status 204
-  res.sendStatus(204);
+  connection.query(sql, [id], (err, results) => {
+    if(err) return res.status(500).json({error: `Errore nell'esecuzione della query: ${err}`});
+    //restituisco lo status 204
+    res.sendStatus(204);
+  })
 }
 
 module.exports = {
